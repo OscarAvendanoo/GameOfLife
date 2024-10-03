@@ -8,7 +8,7 @@ namespace GameOfLife
 {
     internal class Cells
     {
-        
+
         public string Cordinate { get; set; }
         public string State { get; set; }
         public Cells NeighbourTl { get; set; }

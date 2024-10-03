@@ -28,7 +28,7 @@ namespace GameOfLife
                         }
                     }
                 
-                        Thread.Sleep(5);
+                        Thread.Sleep(3);
             }
 
 
