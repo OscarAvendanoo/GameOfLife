@@ -9,7 +9,8 @@ namespace GameOfLife
 {
     internal class UpdateWorld
     {
-
+        // method responsible for printing out each generation of cells to the console
+        // and also calculates the cells state in the next generation
         public String[,] UpdateTheWorld(Cells[,] gridOfCells, int width, int height)
         {
             int numberOfAliveNeighbours;
@@ -20,13 +21,13 @@ namespace GameOfLife
                 for (int i = 0; i < height; i++)
                     for (int j = 0; j < width; j++)
                     {
-                    if((gridOfCells[i, j].State) == "#")
+                    if((gridOfCells[i, j].State) == "Border")
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("█");
                         Console.ResetColor();
                     }
-                    else if ((gridOfCells[i, j].State) == "X")
+                    else if ((gridOfCells[i, j].State) == "Alive")
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write("█");
@@ -35,7 +36,7 @@ namespace GameOfLife
                     else 
                     {
                         Console.ForegroundColor = ConsoleColor.Black;
-                        Console.Write(gridOfCells[i, j].State);
+                        Console.Write("-");
                         Console.ResetColor();
                     }
                     
@@ -45,26 +46,26 @@ namespace GameOfLife
                     }
                            
 
-                    if (gridOfCells[i, j].State != "#")
+                    if (gridOfCells[i, j].State != "Border")
                     {
                         numberOfAliveNeighbours = neighbourCalculator.countAliveNeighbours(gridOfCells[i, j]);
 
                     
-                        if (gridOfCells[i, j].State == "X" && (numberOfAliveNeighbours == 2 || numberOfAliveNeighbours == 3))
+                        if (gridOfCells[i, j].State == "Alive" && (numberOfAliveNeighbours == 2 || numberOfAliveNeighbours == 3))
                             {
-                                nextGeneration[i,j] = "X";
+                                nextGeneration[i,j] = "Alive";
                             }
                                 
 
-                        else if (gridOfCells[i, j].State == "-" && numberOfAliveNeighbours == 3)
+                        else if (gridOfCells[i, j].State == "Dead" && numberOfAliveNeighbours == 3)
                             {
-                                nextGeneration[i, j] = "X";
+                                nextGeneration[i, j] = "Alive";
                             }
 
 
                         else
                         {
-                            nextGeneration[i, j] = "-";
+                            nextGeneration[i, j] = "Dead";
                         }
                         
                     }

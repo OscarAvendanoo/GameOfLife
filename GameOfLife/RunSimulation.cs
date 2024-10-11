@@ -9,7 +9,7 @@ namespace GameOfLife
 {
     internal class RunSimulation
     {
-
+        // The metod which runs the simulation
         public void Run(int numberOfGenerations, int width, int height, Cells[,] gridOfCells)
         {
             UpdateWorld updateWorld = new UpdateWorld();

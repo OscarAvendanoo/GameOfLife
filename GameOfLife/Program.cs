@@ -20,7 +20,7 @@ namespace GameOfLife
 
 
         }
-
+        // creates all the cell objects and stoes them inside a 2D array
         private static void CreateBlankGeneration(int width, int height, Cells[,] gridOfCells)
         {
             for (int i = 0; i < height; i++)
@@ -29,32 +29,28 @@ namespace GameOfLife
                     Cells cell = new Cells();
                     cell.Cordinate = i.ToString() + "," + j.ToString();
                     gridOfCells[i, j] = cell;
-                    //Console.WriteLine(cell.Cordinate);
+                    
                 }
             int counter = 0;
 
-
+        // asigns each cell a state, the outer bound of the cordinatesystem gets the state "boarder"
+        // the rest of the cells is asigned the state "Dead"
             for (int i = 0; i < height; i++)
                 for (int j = 0; j < width; j++)
                 {
                     if (i == 0 || j == 0 || i == height - 1 || j == width - 1)
                     {
-                        gridOfCells[i, j].State = "#";
+                        gridOfCells[i, j].State = "Border";
                     }
                     else
                     {
-                        gridOfCells[i, j].State = "-";
+                        gridOfCells[i, j].State = "Dead";
                     }
-                    //Console.Write(gridOfCells[i, j].State);
-                    counter++;
-                    if (counter == width)
-                    {
-                        //Console.WriteLine();
-                        counter = 0;
-                    }
+                
                 }
         }
 
+        // Loads an alive cell pattern to the the initial generation of cells
         private static void CreateInitialStates(int width, int height, Cells[,] gridOfCells, SeedGenerator seedGenetaror)
         {
             Console.WriteLine("which seed would you like to load?");

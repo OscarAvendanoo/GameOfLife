@@ -10,21 +10,26 @@ namespace GameOfLife
 {
     internal class NeighbourCalculator
     {
-        
+        // counts how many of the cells neighbours that are alive
         public int countAliveNeighbours(Cells cell)
         {
             int cellsAlive = 0;
+            // level is a counter which keeps track of how deep into the recursion the program is
+            // in the method "Display properties"
             int level = 0;
             DisplayProperties(cell,ref cellsAlive,level);
-            if (cell.State == "X")
+            if (cell.State == "Alive")
             {
                 cellsAlive--;
             }
                 
-            //Console.WriteLine(cellsAlive);
+           
             
             return cellsAlive;
         }
+
+        // a recursive funcion which goes thorugh the cells properties (neighbour cells) and checks if their state is alive or dead
+        // if the neighbour is alive, "cellsAlive" gets incremented
         static void DisplayProperties(object cell, ref int cellsAlive, int level)
         {
             int countedAlivecells= 0;
@@ -34,16 +39,16 @@ namespace GameOfLife
             foreach (PropertyInfo property in properties)
             {  
               
-               // Console.WriteLine(property);
+               
                 object propertyValue = property.GetValue(cell);
                 string propertyValueAsString = propertyValue != null ? propertyValue.ToString() : "null";
-                //Console.WriteLine(propertyValueAsString);
-                if(propertyValueAsString is "X")
+                
+                if(propertyValueAsString is "Alive")
                 {
 
                     cellsAlive++;
                 }
-                if(propertyValueAsString == "X" || propertyValueAsString == "-" || propertyValueAsString == "#")
+                if(propertyValueAsString == "Alive" || propertyValueAsString == "Dead" || propertyValueAsString == "Border")
                 {  if(level == 1)
                     {
                         return;
@@ -62,6 +67,7 @@ namespace GameOfLife
                         return;
                     }
                     level++;
+                    // a recursive call to the method it self, creating a new instance of the same method.
                     DisplayProperties(propertyValue, ref cellsAlive, level);
                     level = 0;
 
